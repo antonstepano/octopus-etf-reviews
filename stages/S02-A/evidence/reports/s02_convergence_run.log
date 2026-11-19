@@ -1,0 +1,19 @@
+== S02-A convergence study (baseline binary, unmodified) ==
+binary: /home/lab7a/AI4Science_Octopus_10M_Multiday_v4/workspace/build/baseline-cmake/octopus
+pseudo: /home/lab7a/AI4Science_Octopus_10M_Multiday_v4/workspace/octopus-baseline/share/pseudopotentials/pseudo-dojo.org/nc-sr-05_pbe_standard/C.upf
+
+  sp0.50_R6.0    spacing=0.50  R=6.0  exit=0 Etot=-5.63002901 wall=0.48s
+  sp0.45_R6.0    spacing=0.45  R=6.0  exit=0 Etot=-5.66292696 wall=0.64s
+  sp0.40_R6.0    spacing=0.40  R=6.0  exit=0 Etot=-5.68250268 wall=0.92s
+  sp0.35_R6.0    spacing=0.35  R=6.0  exit=0 Etot=-5.68425426 wall=1.19s
+  sp0.30_R6.0    spacing=0.30  R=6.0  exit=0 Etot=-5.68071041 wall=1.95s
+  sp0.35_R5.0    spacing=0.35  R=5.0  exit=0 Etot=-5.66967754 wall=0.84s
+  sp0.35_R7.0    spacing=0.35  R=7.0  exit=0 Etot=-5.68797201 wall=1.46s
+  sp0.35_R8.0    spacing=0.35  R=8.0  exit=0 Etot=-5.68899020 wall=2.13s
+  sp0.50_R8.0    spacing=0.50  R=8.0  exit=0 Etot=-5.63531966 wall=0.85s
+  sp0.45_R8.0    spacing=0.45  R=8.0  exit=0 Etot=-5.66790933 wall=1.14s
+  sp0.40_R8.0    spacing=0.40  R=8.0  exit=0 Etot=-5.68716817 wall=1.40s
+  sp0.30_R8.0    spacing=0.30  R=8.0  exit=0 Etot=-5.68555889 wall=2.84s
+
+CSV: /home/lab7a/AI4Science_Octopus_10M_Multiday_v4/workspace/reports/s02_convergence.csv
+RESULT: PASSED (all cases ran, all energies parsed)

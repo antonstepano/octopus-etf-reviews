@@ -1,0 +1,47 @@
+cases: 12  (all exit_code = 0)
+
+Series 1 — spacing at fixed R = 6.0 bohr
+         h   bohr     E_total [Ha]  dE vs prev [mHa]
+     0.300   bohr      -5.68071041                  
+     0.350   bohr      -5.68425426            -3.544
+     0.400   bohr      -5.68250268            +1.752
+     0.450   bohr      -5.66292696           +19.576
+     0.500   bohr      -5.63002901           +32.898
+  spread over this series: 54.225 mHa
+
+Series 2 — box radius at fixed spacing 0.35 bohr
+         R   bohr     E_total [Ha]  dE vs prev [mHa]
+     5.000   bohr      -5.66967754                  
+     6.000   bohr      -5.68425426           -14.577
+     7.000   bohr      -5.68797201            -3.718
+     8.000   bohr      -5.68899020            -1.018
+  spread over this series: 19.313 mHa
+
+Series 3 — spacing at fixed R = 8.0 bohr
+         h   bohr     E_total [Ha]  dE vs prev [mHa]
+     0.300   bohr      -5.68555889                  
+     0.350   bohr      -5.68899020            -3.431
+     0.400   bohr      -5.68716817            +1.822
+     0.450   bohr      -5.66790933           +19.259
+     0.500   bohr      -5.63531966           +32.590
+  spread over this series: 53.671 mHa
+
+Box convergence (h = 0.35):
+  E(R=5) -> E(R=6): -14.577 mHa
+  E(R=6) -> E(R=7): -3.718 mHa
+  E(R=7) -> E(R=8): -1.018 mHa
+  ratio d67/d78 = 3.65  (geometric tail -> residual at R=8 ~ -0.279 mHa)
+
+Eigenvalue (state 1, 2s) at R = 8.0:
+  h=0.30  e1=-0.503586  e2=-0.192741
+  h=0.35  e1=-0.502820  e2=-0.193179
+  h=0.40  e1=-0.504653  e2=-0.192528
+  h=0.45  e1=-0.511501  e2=-0.189240
+  h=0.50  e1=-0.521055  e2=-0.184527
+
+--- Derived numerical floor (C atom, NC pseudo-dojo PBE) ---
+  spacing-induced spread at R=8: 53.671 mHa
+  box-induced spread at h=0.35 : 19.313 mHa
+  => total-energy differences below ~5 mHa are NOT resolvable
+     on this mesh family; a 1 mHa claim requires h <= 0.30 AND R >= 8
+     with an explicit extrapolation, and even then is UNVERIFIED.

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "stage": "S02-A",
+  "review_id": "S02A-TOLERANCES-2026-11-19",
+  "source_commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+  "baseline_commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+  "workspace_evidence_commit": "97f2c5c519b371daee8e2b9bb3d05a37f874ad1a",
+  "exported_utc": "2026-11-19T20:23:31.572404+00:00",
+  "files": [
+    {
+      "path": "evidence/reports/s02_convergence.md",
+      "sha256": "e03aca043fac6bf524298dc08472e09aa5e42670a61806e2cc6c55cafa4840ba",
+      "size_bytes": 7332
+    },
+    {
+      "path": "evidence/reports/s02_convergence.csv",
+      "sha256": "8c379c5443cf763a14bf9a117c5a4540133506bc770b1afafaee4e88255d4dc8",
+      "size_bytes": 1338
+    },
+    {
+      "path": "evidence/reports/s02_controls.csv",
+      "sha256": "9235f7f98832559283180c940b01dfb1062ce7f9559bc4cead3673b5297895d4",
+      "size_bytes": 416
+    },
+    {
+      "path": "evidence/reports/s02_provenance.json",
+      "sha256": "8285010d8555b331bd80735f0ea9dfccd029e3371119fd396705d316ab1c3516",
+      "size_bytes": 3281
+    },
+    {
+      "path": "evidence/reports/s02_convergence_run.log",
+      "sha256": "5dab49a9702a7afa5e56e9296cd63a7f3a6d415b192b887f9a2b11dfc919f1f1",
+      "size_bytes": 1323
+    },
+    {
+      "path": "evidence/reports/s02_analysis.log",
+      "sha256": "6ebb552a60dc170ae5c92298338331df68dfa3bb98b3363db6f072b2bc4760af",
+      "size_bytes": 1953
+    },
+    {
+      "path": "evidence/reports/s02_verify_numbers.log",
+      "sha256": "1a839012cc40970a226f98cda18877c9edc2f75a0c2521445fe6abf6de6d4e76",
+      "size_bytes": 1369
+    },
+    {
+      "path": "evidence/tests/s02_convergence.sh",
+      "sha256": "8a12dca54d1ec87bbbc5d7cf472352e316acaffbcbbf8e1990c39c860d2db8bf",
+      "size_bytes": 3905
+    },
+    {
+      "path": "evidence/tests/s02_analyze.py",
+      "sha256": "302c4419d5ad7e21fa8996a1492c76be05f621155fdaa54ef275580c03d3120b",
+      "size_bytes": 3374
+    },
+    {
+      "path": "evidence/tests/verify_s02_numbers.sh",
+      "sha256": "3d223279aa219daee4afbbc2ffd3659aface7a2a0e8b55741fccdd0263f28e56",
+      "size_bytes": 3196
+    },
+    {
+      "path": "evidence/WORK_STATE.md",
+      "sha256": "55d66bf194bcf733ef3e5aa97396cb7e30e7d71d5b30026bead3dced9d949d74",
+      "size_bytes": 12985
+    },
+    {
+      "path": "evidence/AGENT_CHECKPOINT.json",
+      "sha256": "7921b253895ef445e7b9705577d76a2b7132e7a3ca78d3f3005be851c6cea252",
+      "size_bytes": 10654
+    },
+    {
+      "path": "REVIEW_REQUEST.json",
+      "sha256": "76c7647ffca7d2401b441b11b72b163318050fafe7911e2c3b1c83893393f1ee",
+      "size_bytes": 2454
+    }
+  ],
+  "warnings": [
+    "reports/s02_convergence_run.log: absolute Linux home directory (review before publishing)"
+  ],
+  "note": "GitHub commit SHA is a DIFFERENT hash. Never use it with review_ctl.py."
+}

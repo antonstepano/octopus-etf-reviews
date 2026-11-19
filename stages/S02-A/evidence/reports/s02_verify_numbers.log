@@ -1,0 +1,25 @@
+== S02-A numeric verification ==
+  OK   E(sp0.30_R8.0)                                 -5.68555889
+  OK   E(sp0.35_R8.0)                                 -5.68899020
+  OK   E(sp0.40_R8.0)                                 -5.68716817
+  OK   E(sp0.45_R8.0)                                 -5.66790933
+  OK   E(sp0.50_R8.0)                                 -5.63531966
+  OK   E(sp0.35_R5.0)                                 -5.66967754
+  OK   E(sp0.35_R6.0)                                 -5.68425426
+  OK   E(sp0.35_R7.0)                                 -5.68797201
+  OK   spread, series 3 (mHa)                         53.671
+  OK   fine-mesh spread h=0.30..0.40 (mHa)            3.431
+  OK   spread, series 2 R=5..8 (mHa)                  19.313
+  OK   box tail ratio d67/d78                         3.65
+  OK   extrapolated box residual at R=8 (mHa)         0.28
+  OK   cases with non-zero exit code                  0
+  OK   report contains "53.7 mHa"                        
+  OK   report contains "3.4 mHa"                         
+  OK   report contains "19.3 mHa"                        
+  OK   report contains "0.28 mHa"                        
+  OK   report contains "3.65"                            
+  OK   report contains "-5.68899020"                     
+  OK   report contains "-5.68555889"                     
+
+checks passed: 21   failed: 0
+RESULT: PASSED

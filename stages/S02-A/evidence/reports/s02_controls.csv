@@ -1,0 +1,3 @@
+control,description,exit_code,total_energy_H,scf_iterations,md5_static_info,reference_value,delta_H,log
+C1,SCF Tolerance 1.0e-10 vs default at sp0.30_R8.0,0,-5.68555889,21,,-5.68555889,0.00e+00,results/s02_convergence/sp0.30_R8.0_tight/run.log
+C2,repeat run sp0.35_R8.0 determinism,0,-5.68899020,,70944263899de41c370308951abe6484,70944263899de41c370308951abe6484,0,results/s02_convergence/sp0.35_R8.0_repeat/run.log

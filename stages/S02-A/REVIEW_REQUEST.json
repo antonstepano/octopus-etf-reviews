@@ -1,0 +1,25 @@
+{
+  "review_id": "S02A-TOLERANCES-2026-11-19",
+  "stage": "S02-A",
+  "source_commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+  "baseline_commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+  "workspace_evidence_commit": "97f2c5c519b371daee8e2b9bb3d05a37f874ad1a",
+  "status": "NEEDS_REVIEW",
+  "summary": "S02-A numerical convergence study on the UNMODIFIED baseline binary. 12 runs, 3 series, all exit 0. Purpose: satisfy review Q6 (tolerances must come from a documented convergence study, not invented). No source modification. The deliverable is a measured numerical floor plus a proposed tolerance table for the S02 test ladder.",
+  "questions": [
+    "Q1. Is the conclusion 'use same-mesh differences, never absolute energies across meshes' the correct basis for the S02 ladder, or should the ladder instead demand a converged absolute reference (finer mesh / extrapolation) for each rung?",
+    "Q2. The spacing convergence is non-monotonic: E(h=0.35) lies below both E(0.30) and E(0.40) by ~2-3 mHa. Is a jagged sphere-mask plus a hard NLCC pseudo on a regular grid a sufficient explanation to accept, or does this indicate a setup error that must be fixed before any ladder test?",
+    "Q3. Is the proposed 1e-8 Ha same-mesh tolerance defensible given that it rests on a single serial determinism check on one system?",
+    "Q4. The 0.28 mHa box residual at R=8 is a geometric extrapolation from three points (ratio 3.65). Is that acceptable as an estimate, or must a fourth radius (R=9 or 10) be run before quoting it?",
+    "Q5. Should S02-B (rt-TDDFT norm conservation and dt convergence on the C atom) proceed under the existing S02 authorization, or does the tolerance table need sign-off first?",
+    "Q6. Is it acceptable that the convergence study uses only C, while the ladder's first rungs are Ar+ and Ar+-C? Should an Ar+ convergence series be run before S02-B, given that Ar.upf has l_max=2 and 6 projectors (more nonlocal structure than C)?"
+  ],
+  "not_claimed": [
+    "No source modification was made; octopus-patched is still byte-identical to baseline.",
+    "No Ar+, CNT, TDDFT, ETF or moving-ion simulation was performed.",
+    "The convergence study measures discretisation error of one C atom only; it is not a physical validation.",
+    "The non-monotonic spacing convergence is observed, not explained.",
+    "No MPI, GPU, HPC, SSH or Slurm action was taken.",
+    "No APPROVED.json was written by the agent."
+  ]
+}

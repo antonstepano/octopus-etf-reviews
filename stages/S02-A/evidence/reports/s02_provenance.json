@@ -1,0 +1,81 @@
+{
+  "manifest_id": "S02-A-PROVENANCE-2026-11-19",
+  "purpose": "Provenance for the S02-A numerical convergence study. Every number in reports/s02_convergence.csv must be reproducible from this manifest.",
+  "created_at_utc": "2026-11-19T17:45:00Z",
+  "units": "atomic units (Hartree, bohr) throughout; Octopus default output level",
+  "octopus": {
+    "tag": "16.4",
+    "commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+    "tree": "octopus-baseline",
+    "tree_clean": true,
+    "modified": false,
+    "version_string": "octopus 16.4 (git commit 3819069)",
+    "binary": "build/baseline-cmake/octopus",
+    "binary_note": "built in S00, not rebuilt in S01/S02; no source modification exists"
+  },
+  "fork": {
+    "tree": "octopus-patched",
+    "commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+    "tree_clean": true,
+    "modified": false,
+    "note": "byte-identical to baseline; S02-A is a measurement of the unmodified code"
+  },
+  "toolchain": {
+    "fortran": "/usr/bin/gfortran GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+    "c": "/usr/bin/cc",
+    "cmake": "3.22.1",
+    "generator": "Ninja",
+    "build_type": "Release",
+    "fortran_flags_release": "-O3 -DNDEBUG -O3",
+    "mpi": false,
+    "openmp": false,
+    "sparskit": "disabled (CMAKE_DISABLE_FIND_PACKAGE_SPARSKIT=ON; system libskit.so broken)",
+    "cmake_cache": "build/baseline-cmake/CMakeCache.txt"
+  },
+  "pseudopotentials": [
+    {
+      "element": "C",
+      "file": "octopus-baseline/share/pseudopotentials/pseudo-dojo.org/nc-sr-05_pbe_standard/C.upf",
+      "sha256": "f828e50a154e3cad756d748c0b6d5320f920bbcd36d07f2cde696fd68f0fc188",
+      "pseudo_type": "NC",
+      "functional": "PBE",
+      "z_valence": 4.0,
+      "l_max": 1,
+      "number_of_proj": 4,
+      "core_correction": true,
+      "used_in": "S02-A convergence study"
+    },
+    {
+      "element": "Ar",
+      "file": "octopus-baseline/share/pseudopotentials/pseudo-dojo.org/nc-sr-05_pbe_standard/Ar.upf",
+      "sha256": "e366a9edd6ab498b4ffdedccbd021caa0672d9a475c22bbfc28715c3d0649790",
+      "pseudo_type": "NC",
+      "functional": "PBE",
+      "z_valence": 8.0,
+      "l_max": 2,
+      "number_of_proj": 6,
+      "core_correction": true,
+      "used_in": "NOT used in S02-A; recorded because it fixes the Ar+ electron count for S03/S04",
+      "verified_consequence": "z_valence=8.00 => neutral Ar has 8 valence e-; Ar+ therefore has 7 valence e-. This confirms the PHYSICS_TASK_RU statement against the actual file rather than assuming it."
+    }
+  ],
+  "runtime_env": {
+    "OCTOPUS_SHARE": "build/baseline-cmake/share",
+    "LC_ALL": "C (forced in tests/s02_convergence.sh; ru_RU locale writes decimal commas and corrupts CSV)",
+    "note": "without OCTOPUS_SHARE the binary aborts: 'Cannot open variables file' (recorded in S00)"
+  },
+  "reproduce": {
+    "command": "bash tests/s02_convergence.sh && python3 tests/s02_analyze.py",
+    "outputs": [
+      "reports/s02_convergence.csv",
+      "reports/s02_convergence_run.log",
+      "reports/s02_analysis.log",
+      "results/s02_convergence/<case>/"
+    ]
+  },
+  "not_claimed": [
+    "No physical validation. This measures discretisation error of a single C atom.",
+    "No Ar+, no CNT, no TDDFT, no ETF, no moving ion.",
+    "No MPI, no GPU, no HPC."
+  ]
+}

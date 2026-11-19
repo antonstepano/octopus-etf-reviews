@@ -1,0 +1,13 @@
+case,spacing_bohr,radius_bohr,exit_code,total_energy_H,eigen_1_H,eigen_2_H,walltime_s,log
+sp0.50_R6.0,0.50,6.0,0,-5.63002901,-0.510656,-0.172810,0.48,results/s02_convergence/sp0.50_R6.0/run.log
+sp0.45_R6.0,0.45,6.0,0,-5.66292696,-0.501637,-0.178029,0.64,results/s02_convergence/sp0.45_R6.0/run.log
+sp0.40_R6.0,0.40,6.0,0,-5.68250268,-0.495357,-0.181897,0.92,results/s02_convergence/sp0.40_R6.0/run.log
+sp0.35_R6.0,0.35,6.0,0,-5.68425426,-0.493426,-0.182408,1.19,results/s02_convergence/sp0.35_R6.0/run.log
+sp0.30_R6.0,0.30,6.0,0,-5.68071041,-0.494017,-0.181771,1.95,results/s02_convergence/sp0.30_R6.0/run.log
+sp0.35_R5.0,0.35,5.0,0,-5.66967754,-0.474875,-0.160266,0.84,results/s02_convergence/sp0.35_R5.0/run.log
+sp0.35_R7.0,0.35,7.0,0,-5.68797201,-0.500238,-0.190295,1.46,results/s02_convergence/sp0.35_R7.0/run.log
+sp0.35_R8.0,0.35,8.0,0,-5.68899020,-0.502820,-0.193179,2.13,results/s02_convergence/sp0.35_R8.0/run.log
+sp0.50_R8.0,0.50,8.0,0,-5.63531966,-0.521055,-0.184527,0.85,results/s02_convergence/sp0.50_R8.0/run.log
+sp0.45_R8.0,0.45,8.0,0,-5.66790933,-0.511501,-0.189240,1.14,results/s02_convergence/sp0.45_R8.0/run.log
+sp0.40_R8.0,0.40,8.0,0,-5.68716817,-0.504653,-0.192528,1.40,results/s02_convergence/sp0.40_R8.0/run.log
+sp0.30_R8.0,0.30,8.0,0,-5.68555889,-0.503586,-0.192741,2.84,results/s02_convergence/sp0.30_R8.0/run.log

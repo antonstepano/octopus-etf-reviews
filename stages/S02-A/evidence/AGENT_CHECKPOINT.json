@@ -1,0 +1,264 @@
+{
+  "stage": "S02",
+  "status": "NEEDS_REVIEW",
+  "source_commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+  "source_tag": "16.4",
+  "fork_commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+  "fork_modified": false,
+  "last_verified_action": "S02-A numerical convergence study on the unmodified baseline binary: 12 runs, all exit 0; 21/21 numeric checks PASSED (tests/verify_s02_numbers.sh)",
+  "gate_history": [
+    {
+      "stage": "S00",
+      "review_id": "S00-BASE-PIN-2026-11-19",
+      "approved_by": "human_after_external_ChatGPT_review",
+      "approved_at_utc": "2026-11-19T16:57:07.451480+00:00",
+      "scope_granted": "S01 source audit only; MPI, ETF, HPC and physical validation remain pending"
+    },
+    {
+      "stage": "S01",
+      "review_id": "S01-SOURCE-AUDIT-2026-11-19",
+      "approved_by": "human_after_external_ChatGPT_review",
+      "approved_at_utc": "2026-11-19T17:23:04.896481+00:00",
+      "scope_granted": "S02 test-ladder design only; no S04-S07 source changes, no MPI/GPU/HPC"
+    }
+  ],
+  "toolchain": {
+    "gcc": "11.4.0",
+    "gfortran": "11.4.0",
+    "cmake": "3.22.1",
+    "ninja": "1.10.1",
+    "libxc": "5.1.7",
+    "blas_lapack": "Intel MKL 2024.2",
+    "gsl": "2.7.1",
+    "fftw": "serial only (no MPI variants)",
+    "openmpi": "4.1.7a1",
+    "mpif90_resolves_to": "nvfortran (NVIDIA HPC SDK) - incompatible with gfortran build",
+    "cores": 24,
+    "ram_gb": 62
+  },
+  "build": {
+    "dir": "build/baseline-cmake",
+    "generator": "Ninja",
+    "build_type": "Release",
+    "mpi": false,
+    "configure_exit": 0,
+    "build_exit": 0,
+    "wall_seconds": 171.76,
+    "binary": "build/baseline-cmake/octopus",
+    "version_string": "octopus 16.4 (git commit 3819069)",
+    "note": "unchanged since S00; no rebuild performed in S01"
+  },
+  "blockers": [
+    {
+      "id": "MPI_TOOLCHAIN",
+      "severity": "blocking_for_S02_MPI",
+      "detail": "OCTOPUS_MPI=OFF; FFTW_*_MPI_LIB-NOTFOUND; mpif90 is an nvfortran wrapper. Serial build only. No HPC access attempted."
+    },
+    {
+      "id": "SYSTEM_SPARSKIT_BROKEN",
+      "severity": "workaround_applied",
+      "detail": "/usr/lib/libskit.so has unresolved symbols. Disabled via CMAKE_DISABLE_FIND_PACKAGE_SPARSKIT=ON; oct-unfold unavailable."
+    }
+  ],
+  "tests": [
+    {
+      "id": "T-S00-01",
+      "name": "base commit/tag pin",
+      "command": "git -C octopus-baseline rev-parse HEAD; git describe --tags; git status --porcelain",
+      "result": "PASSED",
+      "evidence": "3819069c1341e38e3dd4b2a4285f83eff3cfba36 / 16.4 / clean"
+    },
+    {
+      "id": "T-S00-02",
+      "name": "cmake configure (serial, Release)",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "reports/s00_configure_baseline.log"
+    },
+    {
+      "id": "T-S00-03",
+      "name": "ninja build -j24",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "reports/s00_build_baseline.log"
+    },
+    {
+      "id": "T-S00-04",
+      "name": "binary executes",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "reports/s00_octopus_version.log"
+    },
+    {
+      "id": "T-S00-05",
+      "name": "C-atom SCF smoke test",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "results/s00_smoke/run.log",
+      "scope_limit": "Numerical smoke test only. NOT a physical validation."
+    },
+    {
+      "id": "T-S00-06",
+      "name": "smoke test without OCTOPUS_SHARE",
+      "result": "FAILED",
+      "detail": "expected; documents required runtime env"
+    },
+    {
+      "id": "T-S01-01",
+      "name": "S01 reference verification (table + coverage)",
+      "command": "bash tests/verify_s01_refs.sh",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "reports/s01_verify_refs.log",
+      "observations": {
+        "references_checked": 65,
+        "table_failures": 0,
+        "distinct_citations_in_report": 49,
+        "uncovered_citations": 0
+      },
+      "scope_limit": "Verifies only that the cited code exists at the cited file:line. Says nothing about physics or about whether the proposed patch points are correct."
+    },
+    {
+      "id": "T-S01-02",
+      "name": "absence of ETF machinery in 16.4",
+      "command": "grep -rniE '\\betf\\b' src --include=*.F90 | wc -l",
+      "result": "PASSED",
+      "exit_code": 0,
+      "observations": {
+        "matches": 0
+      },
+      "scope_limit": "Negative finding: no ETF/translation-factor code exists upstream. Confirms S04/S05 are new code, not configuration."
+    },
+    {
+      "id": "T-S02-01",
+      "name": "convergence grid, 12 baseline runs",
+      "command": "bash tests/s02_convergence.sh",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "reports/s02_convergence_run.log",
+      "data": "reports/s02_convergence.csv",
+      "observations": {
+        "cases": 12,
+        "nonzero_exit_codes": 0
+      },
+      "scope_limit": "Measures discretisation error of one C atom. No physics validation."
+    },
+    {
+      "id": "T-S02-02",
+      "name": "analysis from CSV only",
+      "command": "python3 tests/s02_analyze.py",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "reports/s02_analysis.log"
+    },
+    {
+      "id": "T-S02-03",
+      "name": "report/CSV numeric consistency",
+      "command": "bash tests/verify_s02_numbers.sh",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "reports/s02_verify_numbers.log",
+      "observations": {
+        "checks": 21,
+        "failures": 0,
+        "first_pass_failures": 4
+      },
+      "scope_limit": "Verifies only that the report's numbers match the CSV. Says nothing about physics."
+    },
+    {
+      "id": "T-S02-04",
+      "name": "control C1: SCF tolerance 1e-10 vs default",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "results/s02_convergence/sp0.30_R8.0_tight/run.log",
+      "observations": {
+        "delta_H": 0.0
+      },
+      "scope_limit": "Shows the non-monotonicity is not SCF noise."
+    },
+    {
+      "id": "T-S02-05",
+      "name": "control C2: determinism of a repeat run",
+      "result": "PASSED",
+      "exit_code": 0,
+      "log": "results/s02_convergence/sp0.35_R8.0_repeat/run.log",
+      "observations": {
+        "md5_match": true,
+        "md5": "70944263899de41c370308951abe6484"
+      },
+      "scope_limit": "Serial only. MPI determinism is NOT_RUN (MPI blocked)."
+    }
+  ],
+  "s01_findings": {
+    "report": "reports/s01_call_graph.md",
+    "negative": [
+      "N1: zero occurrences of ETF / translation factor in src/",
+      "N2: the only per-projector phase array is the k-point / vector-potential / spiral-BC phase",
+      "N3: for gamma-only finite systems the projector phase array is never allocated (hamiltonian_elec.F90:991, phase.F90:143)",
+      "N4: nphase is a hard-coded 1-or-3 switch, not a general phase-slot count",
+      "N5: prescribed ion trajectories already exist (IonsConstantVelocity, IonsTimeDependentDisplacements)",
+      "N6: no velocity-dependent force term exists"
+    ],
+    "patch_surface": [
+      "S04: src/td/td.F90 td_init_with_wavefunctions (:748) + new input block",
+      "S05: src/hamiltonian/projector.F90 projector_init_phases (:170); hamiltonian_elec.F90 build_phase (:991, :1018); nonlocal_pseudopotential.F90 nphase (:76); hamiltonian_elec_inc.F90 apply_batch (:199)",
+      "S06: src/td/propagator_elec.F90 (:473) harness only",
+      "S07: src/electrons/forces_inc.F90 (:195) velocity-dependent force"
+    ],
+    "risks": [
+      "Two parallel nonlocal implementations exist (ep%proj + project_psi_batch vs vnl%*); patching only one may silently diverge",
+      "Sign/frame of the ETF phase relative to exp(-i k.diff) must be derived, not guessed",
+      "Extending nphase touches GPU buffer sizing (buff_projector_phases) and spiral-BC indexing"
+    ]
+  },
+  "next_task": "Await external review of S02-A (review/PENDING.json, S02A-TOLERANCES-2026-11-19). After approval: S02-B same-mesh rt-TDDFT reproducibility and norm conservation on the C atom.",
+  "not_claimed": [
+    "No source modification was made; octopus-patched is still byte-identical to baseline.",
+    "No Ar+, CNT, TDDFT, ETF or moving-ion simulation was performed.",
+    "The convergence study measures discretisation error of one C atom only; it is not a physical validation.",
+    "The non-monotonic spacing convergence is observed, not explained.",
+    "No MPI, GPU, HPC, SSH or Slurm action was taken.",
+    "No APPROVED.json was written by the agent."
+  ],
+  "updated_at": "2026-11-19T21:05:00+03:00",
+  "s02": {
+    "subtask": "S02-A",
+    "title": "numerical convergence study and tolerance derivation",
+    "status": "COMPLETED",
+    "report": "reports/s02_convergence.md",
+    "provenance": "reports/s02_provenance.json",
+    "data": [
+      "reports/s02_convergence.csv",
+      "reports/s02_controls.csv"
+    ],
+    "scripts": [
+      "tests/s02_convergence.sh",
+      "tests/s02_analyze.py",
+      "tests/verify_s02_numbers.sh"
+    ],
+    "system": "1 C atom, NC pseudo-dojo PBE C.upf, sphere box, serial",
+    "measured": {
+      "spacing_spread_h0.30_0.50_R8_mHa": 53.671,
+      "fine_mesh_spread_h0.30_0.40_R8_mHa": 3.431,
+      "box_spread_R5_8_h0.35_mHa": 19.313,
+      "box_tail_ratio_d67_d78": 3.65,
+      "extrapolated_box_residual_R8_mHa": 0.28,
+      "run_to_run_reproducibility": "bitwise identical (md5 match)",
+      "scf_tolerance_1e-10_vs_default_delta_H": 0.0
+    },
+    "conclusion": "Absolute total energies on this mesh family are meaningful only to ~3 mHa (~80 meV) and spacing convergence is non-monotonic. The ETF test ladder must therefore use same-mesh differences (v=0 vs +v vs -v; legacy vs initial_etf vs traveling_pp at identical grid/dt/PP/trajectory), never absolute energies across meshes.",
+    "verified_side_finding": "Ar.upf: pseudo_type=NC, functional=PBE, z_valence=8.00, l_max=2, number_of_proj=6, core_correction=T, sha256 e366a9edd6ab498b4ffdedccbd021caa0672d9a475c22bbfc28715c3d0649790. Confirms Ar+ has 7 valence electrons for this PP (checked against the file, not assumed).",
+    "limits": [
+      "No Ar+, no CNT, no TDDFT, no ETF, no moving ion simulated.",
+      "Non-monotonic spacing convergence is observed, not explained; the jagged-mask hypothesis was not tested.",
+      "0.28 mHa box residual is a geometric extrapolation, not a verified bound.",
+      "Two parser bugs in the first script version were caught by the script's own failure path and fixed; the bad CSV was discarded."
+    ]
+  },
+  "review_requested": {
+    "review_id": "S02A-TOLERANCES-2026-11-19",
+    "file": "review/PENDING.json",
+    "scope": "S02-A tolerance derivation; blocks S02-B until answered",
+    "requested_at": "2026-11-19T21:05:00+03:00"
+  }
+}
