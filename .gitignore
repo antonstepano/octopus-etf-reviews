@@ -1,0 +1,22 @@
+# This public repo contains curated review artifacts ONLY.
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+*.bin
+*.cube
+*.h5
+*.hdf5
+*.nc
+*.wfn
+*.restart
+*.tmp
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.gz
+__pycache__/
+.DS_Store
