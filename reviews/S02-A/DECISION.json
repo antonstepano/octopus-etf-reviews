@@ -1,0 +1,10 @@
+{
+  "stage": "S02-A",
+  "review_id": "S02A-TOLERANCES-2026-11-19",
+  "source_commit": "3819069c1341e38e3dd4b2a4285f83eff3cfba36",
+  "decision": "APPROVED",
+  "review_document": "CHATGPT_REVIEW.md",
+  "scope": "S02-B unmodified serial rt-TDDFT only; numerical thresholds provisional; no Fortran patches or HPC",
+  "recorded_utc": "2026-11-19T20:50:01.460301+00:00",
+  "recorded_by": "human, following external ChatGPT review"
+}
